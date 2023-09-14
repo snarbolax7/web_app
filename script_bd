@@ -1,0 +1,100 @@
+
+-- Database: web_app
+
+-- DROP DATABASE IF EXISTS web_app;
+
+CREATE DATABASE web_app
+    WITH
+    OWNER = postgres
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'Spanish_Latin America.1252'
+    LC_CTYPE = 'Spanish_Latin America.1252'
+    TABLESPACE = pg_default
+    CONNECTION LIMIT = -1
+    IS_TEMPLATE = False;
+
+
+-- public.ciudad definition
+
+-- Drop table
+
+-- DROP TABLE public.ciudad;
+
+CREATE TABLE public.ciudad (
+	descripcion varchar NULL,
+	idciudad serial4 NOT NULL,
+	CONSTRAINT ciudad_pk PRIMARY KEY (idciudad)
+);
+
+
+-- public.persona definition
+
+-- Drop table
+
+-- DROP TABLE public.persona;
+
+CREATE TABLE public.persona (
+	idciudad int4 NOT NULL,
+	nombre varchar NULL,
+	apellido varchar NULL,
+	cedula int4 NULL,
+	sexo varchar NULL,
+	dirección varchar NULL,
+	teléfono varchar NULL,
+	mail varchar NULL,
+	direccion varchar(255) NULL,
+	telefono varchar(255) NULL,
+	idpersona serial4 NOT NULL,
+	CONSTRAINT persona_pk PRIMARY KEY (idpersona)
+);
+
+
+-- public.persona foreign keys
+
+ALTER TABLE public.persona ADD CONSTRAINT fkkofew1po2j73yb77t0rnl9cv FOREIGN KEY (idciudad) REFERENCES public.ciudad(idciudad);
+
+
+
+-- public.evento definition
+
+-- Drop table
+
+-- DROP TABLE public.evento;
+
+CREATE TABLE public.evento (
+	descripcion varchar NULL,
+	fechaevento varchar NULL,
+	horaevento varchar NULL,
+	estadoevento varchar NULL,
+	"time" time NULL,
+	idevento serial4 NOT NULL,
+	CONSTRAINT evento_pk PRIMARY KEY (idevento)
+);
+
+
+
+
+-- public.asistencia definition
+
+-- Drop table
+
+-- DROP TABLE public.asistencia;
+
+CREATE TABLE public.asistencia (
+	idevento int4 NOT NULL,
+	idpersona int4 NOT NULL,
+	idciudad int4 NOT NULL,
+	asistira bool NULL,
+	estado varchar NULL,
+	idasistencia serial4 NOT NULL
+);
+
+
+-- public.asistencia foreign keys
+
+ALTER TABLE public.asistencia ADD CONSTRAINT fk1b4mc0gt9njxevxyf1rwwgmgy FOREIGN KEY (idciudad) REFERENCES public.ciudad(idciudad);
+ALTER TABLE public.asistencia ADD CONSTRAINT fkldjodi80b64w2nshsnujn4ehg FOREIGN KEY (idpersona) REFERENCES public.persona(idpersona);
+ALTER TABLE public.asistencia ADD CONSTRAINT fks0xr9xpghikkj8w55cib5pgx2 FOREIGN KEY (idevento) REFERENCES public.evento(idevento);
+
+
+
