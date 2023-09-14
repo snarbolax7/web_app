@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>Asistencias</title>
+        <title>Personas</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
         <meta charset="UTF-8">
@@ -25,36 +25,50 @@
         </style>
     </head>
     <body>
+        <nav class="navbar bg-primary justify-content-center">
+            <a th:href="@{home}" class="btn active">Home</a>
+            <a th:href="@{eventos}" class="nav-link active">Eventos</a>
+            <a th:href="@{asistencias}" class="nav-link active">Asistencias</a>
+            <a th:href="@{personas}" class="nav-link active">Personas</a>
+            <a th:href="@{ciudades}" class="nav-link active">Ciudades</a>
+        </nav>
         <div class="container">
             <div class="row">
-                <h1>Lista de Asistencias</h1>
+                <h1>Lista de Personas</h1>
             </div>
              <div class="row">
                 <div class="col-lg-3">
-                    <a th:href="@{/asistencias/asistencia_nueva}" class="btn btn-primary btn-sm mb-3">Nueva asistencia</a>
+                    <a th:href="@{/personas/persona_nueva}" class="btn btn-primary btn-sm mb-3">Nueva Persona</a>
                 </div>
             </div>
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
+                        <th>idPersona</th>
                         <th>Ciudad</th>
-                        <th>Evento</th>
-                        <th>Persona</th>
-                        <th>Asistira</th>
-                        <th>Estado</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Cedula</th>
+                        <th>Sexo</th>
+                        <th>Direccion</th>
+                        <th>Telefono</th>
+                        <th>Mail</th>
                         <th>Accion</th>
                     </tr>    
                 </thead>
                 <tbody>
-                    <tr th:each="asistencia: ${asistencias}">
-                        <td th:text="${asistencia.ciudad.descripcion}"></td>
-                        <td th:text="${asistencia.evento.descripcion}"></td>
-                        <td th:text="${asistencia.persona.nombre}"></td>
-                        <td th:text="${asistencia.asistira}"></td>
-                        <td th:text="${asistencia.estado}"></td>
+                    <tr th:each="persona: ${personas}">
+                        <td th:text="${persona.idPersona}"></td>
+                        <td th:text="${persona.nombre}"></td>
+                        <td th:text="${persona.apellido}"></td>
+                        <td th:text="${persona.cedula}"></td>
+                        <td th:text="${persona.sexo}"></td>
+                        <td th:text="${persona.direccion}"></td>
+                        <td th:text="${persona.telefono}"></td>
+                        <td th:text="${persona.mail}"></td>
                         <td>
-                            <a th:href="@{/asistencias/editar/{id}(id=${asistencia.idAsistencia})}" class="btn btn-primary">Editar</a>
-                            <a th:href="@{/asistencias/eliminar/{id}(id=${asistencia.idAsistencia})}" class="btn btn-danger">Eliminar</a>
+                            <a th:href="@{/personas/editar/{id}(id=${persona.idPersona})}" class="btn btn-primary">Editar</a>
+                            <a th:href="@{/personas/eliminar/{id}(id=${persona.idPersona})}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

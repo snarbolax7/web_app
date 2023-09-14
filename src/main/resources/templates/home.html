@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/w3css/3/w3.css">
     <head>
-        <title>Ciudades</title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-        <!--<meta charset="UTF-8">-->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
         <style>
             h1 {
                 position: relative;
@@ -23,10 +22,16 @@
                 text-transform: uppercase;
                 padding-bottom: 5px;
             }
+            a{
+                margin-left: 10px;
+                margin-right: 10px;
+                color: azure;
+            }
         </style>
-
     </head>
     <body>
+
+        <!-- Navigation -->
         <nav class="navbar bg-primary justify-content-center">
             <a th:href="@{home}" class="btn active">Home</a>
             <a th:href="@{eventos}" class="nav-link active">Eventos</a>
@@ -34,32 +39,7 @@
             <a th:href="@{personas}" class="nav-link active">Personas</a>
             <a th:href="@{ciudades}" class="nav-link active">Ciudades</a>
         </nav>
-        <div class="container">
-            <div class="row">
-                <h1>Lista de Ciudades</h1>
-            </div>
-            <div class="row">
-                <div class="col-lg-3">
-                    <a th:href="@{/ciudades/ciudad_nueva}" class="btn btn-primary btn-sm mb-3">Nueva ciudad</a>
-                </div>
-            </div>
-            <table class="table table-striped table-bordered">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Ciudad</th>
-                        <th>Acccion</th>
-                    </tr>    
-                </thead>
-                <tbody>
-                    <tr th:each="ciudad: ${ciudades}">
-                        <td th:text="${ciudad.descripcion}"></td>
-                        <td>
-                            <a th:href="@{/ciudades/editar/{id}(id=${ciudad.idCiudad})}" class="btn btn-primary">Editar</a>
-                            <a th:href="@{/ciudades/eliminar/{id}(id=${ciudad.idCiudad})}" class="btn btn-danger">Eliminar</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <h1>BIENVENIDOS A LA PAGINA HOME DEL PROYECTO WEB_APP</h1>
     </body>
 </html>
+

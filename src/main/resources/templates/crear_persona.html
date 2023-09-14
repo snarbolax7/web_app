@@ -10,29 +10,116 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            h1 {
+                position: relative;
+                padding: 0;
+                margin: 0;
+                font-family: "Raleway", sans-serif;
+                font-weight: 300;
+                font-size: 40px;
+                color: #080808;
+                -webkit-transition: all 0.4s ease 0s;
+                -o-transition: all 0.4s ease 0s;
+                transition: all 0.4s ease 0s;
+                text-align: center;
+                text-transform: uppercase;
+                padding-bottom: 5px;
+            }
+        </style>
     </head>
     <body>
+        <nav class="navbar bg-primary justify-content-center">
+            <a th:href="@{home}" class="btn active">Home</a>
+            <a th:href="@{eventos}" class="nav-link active">Eventos</a>
+            <a th:href="@{asistencias}" class="nav-link active">Asistencias</a>
+            <a th:href="@{personas}" class="nav-link active">Personas</a>
+            <a th:href="@{ciudades}" class="nav-link active">Ciudades</a>
+        </nav>
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class="text-center">Cargar nueva Ciudad</h1>
+                    <h1 class="text-center">Crear Persona</h1>
                     <div class="card-body">
-                        <form th:action="@{/ciudades}" th:object = "${ciudad}" method="POST">
+                        <form th:action="@{/personas/{idPersona} (idPersona=${persona.idPersona})}" th:object = "${persona}" method="POST">
                             <div class="form-group">
-                                <label>Id Ciudad</label>
+                                <label>Id Persona</label>
                                 <input type="text"
-                                       name="idCiudad"
-                                       th:field="*{idCiudad}"
-                                       placeholder="Ingresa id de Ciudad"
+                                       name="idPersona"
+                                       th:field="*{idPersona}"
+                                       placeholder="Ingresa id de Persona"
                                        class="form-control"
                                        />
                             </div>
                             <div class="form-group">
-                                <label>Descripcion</label>
+                                <label>Ciudad</label>
                                 <input type="text"
-                                       name="descripcion"
-                                       th:field="*{descripcion}"
+                                       name="idCiudad"
+                                       th:field="*{ciudad}"
                                        placeholder="Ingresa descripcion de la Ciudad"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Nombres</label>
+                                <input type="text"
+                                       name="nombre"
+                                       th:field="*{nombre}"
+                                       placeholder="Ingresa Nombres"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Apellidos</label>
+                                <input type="text"
+                                       name="apellido"
+                                       th:field="*{apellido}"
+                                       placeholder="Ingresa Apellidos"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Cedula</label>
+                                <input type="text"
+                                       name="cedula"
+                                       th:field="*{cedula}"
+                                       placeholder="Ingresa cedula"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Sexo</label>
+                                <input type="text"
+                                       name="sexo"
+                                       th:field="*{sexo}"
+                                       placeholder="Ingresa sexo"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Direccion</label>
+                                <input type="text"
+                                       name="direccion"
+                                       th:field="*{direccion}"
+                                       placeholder="Ingresa direccion"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Telefono</label>
+                                <input type="text"
+                                       name="telefono"
+                                       th:field="*{telefono}"
+                                       placeholder="Ingresa telefono"
+                                       class="form-control"
+                                       />
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text"
+                                       name="mail"
+                                       th:field="*{mail}"
+                                       placeholder="Ingresa mail"
                                        class="form-control"
                                        />
                             </div>

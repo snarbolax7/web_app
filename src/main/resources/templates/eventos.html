@@ -25,36 +25,43 @@
         </style>
     </head>
     <body>
+        <nav class="navbar bg-primary justify-content-center">
+            <a th:href="@{home}" class="btn active">Home</a>
+            <a th:href="@{eventos}" class="nav-link active">Eventos</a>
+            <a th:href="@{asistencias}" class="nav-link active">Asistencias</a>
+            <a th:href="@{personas}" class="nav-link active">Personas</a>
+            <a th:href="@{ciudades}" class="nav-link active">Ciudades</a>
+        </nav>
         <div class="container">
             <div class="row">
-                <h1>Lista de Asistencias</h1>
+                <h1>Lista de Eventos</h1>
             </div>
              <div class="row">
                 <div class="col-lg-3">
-                    <a th:href="@{/asistencias/asistencia_nueva}" class="btn btn-primary btn-sm mb-3">Nueva asistencia</a>
+                    <a th:href="@{/eventos/evento_nuevo}" class="btn btn-primary btn-sm mb-3">Nuevo evento</a>
                 </div>
             </div>
             <table class="table table-striped table-bordered">
                 <thead class="table-dark">
                     <tr>
-                        <th>Ciudad</th>
-                        <th>Evento</th>
-                        <th>Persona</th>
-                        <th>Asistira</th>
+                        <th>idEvento</th>
+                        <th>Descripcion</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
                         <th>Estado</th>
                         <th>Accion</th>
                     </tr>    
                 </thead>
                 <tbody>
-                    <tr th:each="asistencia: ${asistencias}">
-                        <td th:text="${asistencia.ciudad.descripcion}"></td>
-                        <td th:text="${asistencia.evento.descripcion}"></td>
-                        <td th:text="${asistencia.persona.nombre}"></td>
-                        <td th:text="${asistencia.asistira}"></td>
-                        <td th:text="${asistencia.estado}"></td>
+                    <tr th:each="evento: ${eventos}">
+                        <td th:text="${evento.idEvento}"></td>
+                        <td th:text="${evento.descripcion}"></td>
+                        <td th:text="${evento.fechaEvento}"></td>
+                        <td th:text="${evento.horaEvento}"></td>
+                        <td th:text="${evento.estadoEvento}"></td>
                         <td>
-                            <a th:href="@{/asistencias/editar/{id}(id=${asistencia.idAsistencia})}" class="btn btn-primary">Editar</a>
-                            <a th:href="@{/asistencias/eliminar/{id}(id=${asistencia.idAsistencia})}" class="btn btn-danger">Eliminar</a>
+                            <a th:href="@{/eventos/editar/{id}(id=${evento.idEvento})}" class="btn btn-primary">Editar</a>
+                            <a th:href="@{/eventos/eliminar/{id}(id=${evento.idEvento})}" class="btn btn-danger">Eliminar</a>
                         </td>
                     </tr>
                 </tbody>

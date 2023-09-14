@@ -10,71 +10,87 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Other/html.html to edit this temp
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            h1 {
+                position: relative;
+                padding: 0;
+                margin: 0;
+                font-family: "Raleway", sans-serif;
+                font-weight: 300;
+                font-size: 40px;
+                color: #080808;
+                -webkit-transition: all 0.4s ease 0s;
+                -o-transition: all 0.4s ease 0s;
+                transition: all 0.4s ease 0s;
+                text-align: center;
+                text-transform: uppercase;
+                padding-bottom: 5px;
+            }
+        </style>
     </head>
     <body>
+        <nav class="navbar bg-primary justify-content-center">
+            <a th:href="@{home}" class="btn active">Home</a>
+            <a th:href="@{eventos}" class="nav-link active">Eventos</a>
+            <a th:href="@{asistencias}" class="nav-link active">Asistencias</a>
+            <a th:href="@{personas}" class="nav-link active">Personas</a>
+            <a th:href="@{ciudades}" class="nav-link active">Ciudades</a>
+        </nav>
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6 container justify-content-center card">
-                    <h1 class="text-center">Cargar nueva Asistencia</h1>
+                    <h1 class="text-center">Cargar nuevo Evento</h1>
                     <div class="card-body">
-                        <form th:action="@{/asistencias}" th:object = "${asistencia}" method="POST">
+                        <form th:action="@{/eventos}" th:object = "${evento}" method="POST">
                             <div class="form-group">
-                                <label>Id Asistencia</label>
-                                <input type="text"
-                                       name="idAsistencia"
-                                       th:field="*{idAsistencia}"
-                                       placeholder="Ingresa id de idAsistencia"
-                                       class="form-control"
-                                       />
-                            </div>
-                            <div class="form-group">
-                                <label>Evento</label>
+                                <label>Id Evento</label>
                                 <input type="text"
                                        name="idEvento"
-                                       th:field="*{evento}"
-                                       placeholder="Ingresa el Id del evento"
+                                       th:field="*{idEvento}"
+                                       placeholder="Ingresa id de Evento"
                                        class="form-control"
                                        />
                             </div>
                             <div class="form-group">
-                                <label>Persona</label>
+                                <label>Descripcion</label>
                                 <input type="text"
-                                       name="idPersona"
-                                       th:field="*{persona}"
-                                       placeholder="Ingresa el Id de Persona"
+                                       name="descripcion"
+                                       th:field="*{descripcion}"
+                                       placeholder="Descripcion del evento"
                                        class="form-control"
                                        />
                             </div>
-                             <div class="form-group">
-                                <label>Ciudad</label>
+                            <div class="form-group">
+                                <label>Fecha del evento</label>
                                 <input type="text"
-                                       name="idCiudad"
-                                       th:field="*{ciudad}"
-                                       placeholder="Ingresa el Id de Ciudad"
+                                       name="fechaEvento"
+                                       th:field="*{fechaEvento}"
+                                       placeholder="Ingresa la fecha"
                                        class="form-control"
                                        />
                             </div>
-                             <div class="form-group">
-                                <label>Asistira</label>
-                                <input type="checkbox"
-                                       name="asistira"
-                                       th:field="*{asistira}"
-                                       />
-                            </div>
-                             <div class="form-group">
-                                <label>Estado</label>
+                            <div class="form-group">
+                                <label>Hora del evento</label>
                                 <input type="text"
-                                       name="estado"
-                                       th:checked="*{estado}"
-                                       placeholder="Ingresa el estado"
+                                       name="horaEvento"
+                                       th:field="*{horaEvento}"
+                                       placeholder="Ingresa la hora"
                                        class="form-control"
                                        />
-                            </div>
-                            <div class="footer-body">
-                                <button type="submit" class="btn btn-primary">
-                                    Guardar
-                                </button>
-                            </div>
+                                <div class="form-group">
+                                    <label>Estado</label>
+                                    <input type="text"
+                                           name="estadoEvento"
+                                           th:checked="*{estadoEvento}"
+                                           placeholder="Ingresa el estado"
+                                           class="form-control"
+                                           />
+                                </div>
+                                <div class="footer-body">
+                                    <button type="submit" class="btn btn-primary">
+                                        Guardar
+                                    </button>
+                                </div>
                         </form>
                     </div>
                 </div>

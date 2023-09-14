@@ -40,29 +40,31 @@ public class EventosController {
     private EventoDao eventoDao;
     @Autowired
     private PersonaDao personaDao;
-
+    @GetMapping(value = "/home")
+    public String getHome(Model model) {
+        return "home";
+    }
+    
     @GetMapping(value = "/asistencias")
     public String getAllAsistencias(Model model) {
         model.addAttribute("asistencias", asistenciaDao.findAll());
         return "asistencias";
     }
-
     @PostMapping(value = "/asistencias")
     public String saveAsistencia(@ModelAttribute("asistencia") Asistencia asistencia) {
         asistenciaDao.save(asistencia);
-        return "redirect:asistencias";
+        return "redirect:/asistencias";
     }
-    
     @GetMapping(value = "/asistencias/editar/{idAsistencia}")
     public String formulaioEditarAsistencia(@PathVariable Integer idAsistencia, Model model){
         Asistencia asistencia = asistenciaDao.findById(idAsistencia).get();
         model.addAttribute("asistencia", asistencia);
         return "editar_asistencia";
     }
-    @GetMapping(value = "asistencias/eliminar/{idAsistencia}")
+    @GetMapping(value = "/asistencias/eliminar/{idAsistencia}")
     public String formularioEliminarAsistencia(@PathVariable Integer idAsistencia, Model model){
         asistenciaDao.deleteById(idAsistencia);
-        return "redirect:asistencias";
+        return "redirect:/asistencias";
     }
     @PostMapping("/asistencias/{idAsistencia}")
     public String updateAsistencia(@PathVariable Integer idAsistencia, @ModelAttribute("asistencia") Asistencia asistencia, Model model){
@@ -76,7 +78,6 @@ public class EventosController {
         asistenciaDao.save(asistenciaExistente);
         return "redirect:asistencias";
     }
-    
     @GetMapping(value = "/asistencias/asistencia_nueva")
     public String formularioCrearAsistencia(Model model) {
         Asistencia asistencia = new Asistencia();
@@ -84,7 +85,6 @@ public class EventosController {
         return "crear_asistencia";
     }
     
-
     @GetMapping(value = "/ciudades")
     public String getAllCiudades(Model model) {
         model.addAttribute("ciudades", ciudadDao.findAll());
@@ -95,7 +95,6 @@ public class EventosController {
         ciudadDao.save(ciudad);
         return "redirect:/ciudades";
     }
-    
     @GetMapping(value="ciudades/editar/{idCiudad}")
     public String formularioEditarCiudad(@PathVariable Integer idCiudad, Model model){
         Ciudad ciudad = ciudadDao.findById(idCiudad).get();
@@ -107,7 +106,6 @@ public class EventosController {
         ciudadDao.deleteById(idCiudad);
         return "redirect:/ciudades";
     }
-
     @PostMapping(value = "/ciudades/{idCiudad}")
     public String updateCiudad(@PathVariable Integer idCiudad, @ModelAttribute("ciudad") Ciudad ciudad, Model model) {
         Ciudad ciudadExistente = ciudadDao.findById(idCiudad).get();
@@ -115,7 +113,6 @@ public class EventosController {
         ciudadDao.save(ciudadExistente);
         return "redirect:/ciudades";
     }
-    
     @GetMapping(value = "/ciudades/ciudad_nueva")
     public String formularioCrearCiudad(Model model) {
         Ciudad ciudad = new Ciudad();
@@ -123,33 +120,85 @@ public class EventosController {
         return "crear_ciudad";
     }
 
-    @GetMapping(value = "eventos")
-    public ResponseEntity getAllEventos() {
-        return new ResponseEntity(eventoDao.findAll(), HttpStatus.OK);
+    @GetMapping(value = "/eventos")
+    public String getAllEventos(Model model) {
+        model.addAttribute("eventos", eventoDao.findAll());
+        return "eventos";
     }
-
-    @PostMapping(value = "evento")
-    public ResponseEntity saveEvento(@RequestBody Evento evento) {
-        return new ResponseEntity(eventoDao.save(evento), HttpStatus.CREATED);
+    @PostMapping(value = "/eventos")
+    public String saveEvento(@ModelAttribute("evento") Evento evento) {
+        eventoDao.save(evento);
+        return "redirect:/eventos";
     }
-
-    @GetMapping(value = "evento/{id_evento}")
-    public ResponseEntity getEventoById(@PathVariable("id_evento") Integer id) {
-        return new ResponseEntity(eventoDao.findById(id), HttpStatus.CREATED);
+    @GetMapping(value="/eventos/editar/{idEvento}")
+    public String formularioEditarEvento(@PathVariable Integer idEvento, Model model){
+        Evento evento = eventoDao.findById(idEvento).get();
+        model.addAttribute("evento", evento);
+        return "editar_evento";
     }
-
+    @GetMapping(value="/eventos/eliminar/{idEvento}")
+    public String formularioEliminarEvento(@PathVariable Integer idEvento, Model model){
+        eventoDao.deleteById(idEvento);
+        return "redirect:/eventos";
+    }
+    @PostMapping(value = "/eventos/{idEventos}")
+    public String updateEvento(@PathVariable Integer idEvento, @ModelAttribute("evento") Evento evento, Model model) {
+        Evento eventoExistente = eventoDao.findById(idEvento).get();
+        eventoExistente.setDescripcion(evento.getDescripcion());
+        eventoExistente.setEstadoEvento(evento.getEstadoEvento());
+        eventoExistente.setFechaEvento(evento.getFechaEvento());
+        eventoExistente.setHoraEvento(evento.getHoraEvento());
+        eventoExistente.setIdEvento(evento.getIdEvento());
+        eventoDao.save(eventoExistente);
+        return "redirect:/eventos";
+    }
+    @GetMapping(value = "/eventos/evento_nuevo")
+    public String formularioCrearEvento(Model model) {
+        Evento evento = new Evento();
+        model.addAttribute("evento", evento);
+        return "crear_evento";
+    }
+    
     @GetMapping(value = "/personas")
-    public ResponseEntity getAllPersonas() {
-        return new ResponseEntity(personaDao.findAll(), HttpStatus.OK);
+    public String getAllPersonas(Model model) {
+        model.addAttribute("personas", personaDao.findAll());
+        return "personas";
     }
-
-    @PostMapping(value = "persona")
-    public ResponseEntity Persona(@RequestBody Persona persona) {
-        return new ResponseEntity(personaDao.save(persona), HttpStatus.CREATED);
+    @PostMapping(value = "personas")
+    public String savePersona(@ModelAttribute("persona") Persona persona) {
+        personaDao.save(persona);
+        return "redirect:/personas";
     }
-
-    @GetMapping(value = "persona")
-    public ResponseEntity savePersona(@PathVariable("id_persona") Integer id) {
-        return new ResponseEntity(personaDao.findById(id), HttpStatus.CREATED);
+    @GetMapping(value="/personas/editar/{idPersona}")
+    public String formularioEditarPersona(@PathVariable Integer idPersona, Model model){
+        Persona persona = personaDao.findById(idPersona).get();
+        model.addAttribute("persona", persona);
+        return "editar_persona";
+    }
+    @GetMapping(value="/personas/eliminar/{idPersona}")
+    public String formularioEliminarPersona(@PathVariable Integer idPersona, Model model){
+        personaDao.deleteById(idPersona);
+        return "redirect:/personas";
+    }
+    @PostMapping(value = "/personas/{idPersona}")
+    public String updatePersona(@PathVariable Integer idPersona, @ModelAttribute("persona") Persona persona, Model model) {
+        Persona personaExistente = personaDao.findById(idPersona).get();
+        personaExistente.setApellido(persona.getApellido());
+        personaExistente.setCedula(persona.getCedula());
+        personaExistente.setCiudad(persona.getCiudad());
+        personaExistente.setDireccion(persona.getDireccion());
+        personaExistente.setIdPersona(persona.getIdPersona());
+        personaExistente.setMail(persona.getMail());
+        personaExistente.setNombre(persona.getNombre());
+        personaExistente.setSexo(persona.getSexo());
+        personaExistente.setTelefono(persona.getTelefono());
+        personaDao.save(personaExistente);
+        return "redirect:/personas";
+    }
+    @GetMapping(value = "/personas/persona_nueva")
+    public String formularioCrearPersona(Model model) {
+        Persona persona = new Persona();
+        model.addAttribute("persona", persona);
+        return "crear_persona";
     }
 }
